@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     DEBUG: bool = False
 
+    SUPER_ADMIN_USERNAME: str
+    SUPER_ADMIN_PASSWORD: str
+    ADMIN_USERNAME: str
+    ADMIN_PASSWORD: str
+    
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
