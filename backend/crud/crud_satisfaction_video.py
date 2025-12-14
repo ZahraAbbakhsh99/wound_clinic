@@ -1,0 +1,5 @@
+from crud.base import CRUDBase
+from models.satisfaction_video import SatisfactionVideo
+from schemas.satisfaction_video import SatisfactionVideoCreate, SatisfactionVideoUpdate
+
+satisfaction_video = CRUDBase[SatisfactionVideo, SatisfactionVideoCreate, SatisfactionVideoUpdate](SatisfactionVideo)
