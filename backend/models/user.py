@@ -1,10 +1,10 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, Boolean, DateTime, Text
+from sqlalchemy import Column, Enum, String, Boolean, DateTime, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from core.database import Base
-
+from .enums import UserRole
 
 class User(Base):
     __tablename__ = "user"
@@ -15,6 +15,7 @@ class User(Base):
     full_name = Column(String(200))
     is_active = Column(Boolean, default=True)
 
+    role = Column(Enum(UserRole, name="user_role_enum"), nullable=False, server_default=UserRole.admin.value)
     created_at = Column(DateTime(timezone=True), default=datetime.utcnow)
     updated_at = Column(DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow)
     deleted_at = Column(DateTime(timezone=True))

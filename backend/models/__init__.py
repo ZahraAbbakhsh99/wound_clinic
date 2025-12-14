@@ -9,3 +9,4 @@ from .seo_settings import SeoSettings
 from .site_settings import SiteSettings
 from .user import User
 from .auth_session import AuthSession
+from .colleague import Colleague, ColleagueRegistration

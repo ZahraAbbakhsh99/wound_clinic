@@ -14,5 +14,5 @@ class SeoSettings(Base):
     link_url = Column(Text, nullable=True)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(TIMESTAMP(timezone=True), onupdate=func.now())
-
-    article = relationship("Article", back_populates="seo_id")
+    
+    article = relationship("Article", back_populates="seo")

@@ -17,3 +17,7 @@ class WoundCategory(str, enum.Enum):
     surgery = "surgery"
     burns = "burns"
     general = "general"
+
+class UserRole(str, enum.Enum):
+    super_admin = "super_admin"
+    admin = "admin"
