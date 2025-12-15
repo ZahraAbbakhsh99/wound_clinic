@@ -16,6 +16,8 @@ from routes.dashboard import router7 as dashboard_portfolio_router
 from routes.dashboard import router8 as dashboard_colleague_router
 from routes.dashboard import router9 as dashboard_doctor_router
 
+from routes.website import router as website_router
+
 from routes.crud import crud_router
 from utils.jalali import *
 
@@ -47,6 +49,7 @@ app.include_router(dashboard_portfolio_router)
 app.include_router(dashboard_satisfaction_video_router)
 app.include_router(dashboard_site_settings_router)
 
+app.include_router(website_router)
 app.include_router(crud_router)
 
 app.mount("/media", StaticFiles(directory="media"), name="media")
@@ -57,7 +60,7 @@ async def on_startup():
     create_initial_users()
     
 
-@app.get("connect_to_db/")
+@app.get("/connect_to_db/")
 def test_connection(db: Session = Depends(get_db)):
     return {"message": "Database connected successfully!"}
 
@@ -70,22 +73,22 @@ async def upload_image(file: UploadFile):
     url = f"/media/images/{file.filename}"
     return {"url": url}
 
-@app.get("/convert/jalali-to-gregorian/")
-def convert_jalali(date: str):
-    """
-    Example: /convert/jalali-to-gregorian/?date=1404-09-17 14:30
-    """
-    gregorian_dt = jalali_to_gregorian(date)
-    return {"gregorian": gregorian_dt.isoformat()}
+# @app.get("/convert/jalali-to-gregorian/")
+# def convert_jalali(date: str):
+#     """
+#     Example: /convert/jalali-to-gregorian/?date=1404-09-17 14:30
+#     """
+#     gregorian_dt = jalali_to_gregorian(date)
+#     return {"gregorian": gregorian_dt.isoformat()}
 
-@app.get("/convert/gregorian-to-jalali/")
-def convert_gregorian():
-    """
-    Converts current time to Jalali
-    """
-    now = datetime.now()
-    jalali_date = gregorian_to_jalali(now)
-    return {"jalali": jalali_date}
+# @app.get("/convert/gregorian-to-jalali/")
+# def convert_gregorian():
+#     """
+#     Converts current time to Jalali
+#     """
+#     now = datetime.now()
+#     jalali_date = gregorian_to_jalali(now)
+#     return {"jalali": jalali_date}
 
 @app.on_event("shutdown")
 async def on_shutdown():
