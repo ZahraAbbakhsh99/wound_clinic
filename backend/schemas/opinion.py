@@ -1,5 +1,7 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, field_serializer
 from typing import List, Optional
+from datetime import datetime
+import jdatetime
 
 from uuid import UUID
 from models.enums import ContentStatus
@@ -41,3 +43,21 @@ class OpinionStatsResponse(BaseModel):
 
 class AllOpinionsResponse(BaseModel):
     items: List[OpinionItem]
+
+class OpinionOut(BaseModel):
+    id: UUID
+    author_name: str
+    email: Optional[EmailStr]
+    message: str
+    status: ContentStatus
+    created_at: datetime
+
+
+    @field_serializer("created_at")
+    def serialize_created_at(self, dt: datetime):
+        return jdatetime.datetime.fromgregorian(
+            datetime=dt
+        ).strftime("%d %B %Y")
+    
+    class Config:
+        from_attributes = True

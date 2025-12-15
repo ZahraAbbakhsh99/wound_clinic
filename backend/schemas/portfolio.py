@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from models.enums import WoundCategory
 from uuid import UUID
+from datetime import datetime
 
 # create
 class PortfolioCreate(BaseModel):
@@ -30,6 +31,7 @@ class PortfolioOut(BaseModel):
     description: Optional[str] = None
     before_picture_url: str
     after_picture_url: str
-
+    date: str
+    
     class Config:
         from_attributes = True 

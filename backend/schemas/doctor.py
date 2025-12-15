@@ -139,3 +139,9 @@ class DoctorRegistrationOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class DoctorPictureOut(BaseModel):
+    picture_url: str
+
+    class Config:
+        from_attributes = True
